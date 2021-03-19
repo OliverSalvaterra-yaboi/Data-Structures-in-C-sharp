@@ -72,6 +72,8 @@ namespace heftyGraph
             //heap.
 
             List<Vertex<Point>> Apath = Asearch.A(maze, new Point (2, 0), new Point (1, 2));
+
+            maze.BellFord();
         }
     }
 }

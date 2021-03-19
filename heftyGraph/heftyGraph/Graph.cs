@@ -291,6 +291,55 @@ namespace heftyGraph
             //}
         }
 
+        public bool BellFord()
+        {
+            Dictionary<Vertex<T>, (Vertex<T> parent, double cost)> vs = new Dictionary<Vertex<T>, (Vertex<T> parent, double cost)>();
+            //Heap<double> heap = new Heap<double>(Comparer<double>.Create((a, b) => a.CompareTo(b)));
+
+            var heap = new Heap<Vertex<T>>(Comparer<Vertex<T>>.Create((a, b) => a.total.CompareTo(b.total)));
+
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                vertices[i].visited = false;
+                vs.Add(vertices[i], (null, double.MaxValue));
+            }
+
+            foreach(Vertex<T> v in vertices)
+            {
+                heap.Insert(v);
+            }
+
+            while (heap.Count > 0)
+            {
+                var current = heap.Pop();
+
+                if (!current.visited && !current.closed)
+                {
+                    current.visited = true;
+
+                    foreach (var edge in current.edges)
+                    {
+                        var neigh = edge.end;
+
+                        double t = vs[current].cost + edge.heft;
+
+                        if(t < vs[current].cost)
+                        {
+                            return true;
+                        }
+
+                        if (t < vs[neigh].cost)
+                        {
+                            vs[neigh] = (current, t);
+                        }
+
+                        heap.Insert(neigh);
+                    }
+                }
+            }
+            return false;
+        }
+
         public List<T> Dijkstras(T start, T end)
         {
             Vertex<T> s = search(start);
