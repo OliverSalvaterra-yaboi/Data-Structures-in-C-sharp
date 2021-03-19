@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imnotgoingotmakeajokeaboutHASH", "imnotgoingotmakeajokeaboutHASH\imnotgoingotmakeajokeaboutHASH.csproj", "{EB8786B1-312D-42F1-9952-2D80F51B7209}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unittestforHashEggsandbacon", "unittestforHashEggsandbacon\unittestforHashEggsandbacon.csproj", "{E1E9AB7E-A048-420B-B692-F1989FB2AAF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB8786B1-312D-42F1-9952-2D80F51B7209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB8786B1-312D-42F1-9952-2D80F51B7209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB8786B1-312D-42F1-9952-2D80F51B7209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB8786B1-312D-42F1-9952-2D80F51B7209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E9AB7E-A048-420B-B692-F1989FB2AAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E9AB7E-A048-420B-B692-F1989FB2AAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E9AB7E-A048-420B-B692-F1989FB2AAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E9AB7E-A048-420B-B692-F1989FB2AAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14DC53B2-9664-4839-9EE8-ED303EC51CBF}
+	EndGlobalSection
+EndGlobal
