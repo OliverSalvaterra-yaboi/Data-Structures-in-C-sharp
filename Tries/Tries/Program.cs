@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
 
 namespace Tries
 {
@@ -26,7 +28,7 @@ namespace Tries
             TrieNode temp = root;
             bool isNewWord = false;
 
-            foreach(char c in word)
+            foreach (char c in word)
             {
                 if (!temp.Children.ContainsKey(c))
                 {
@@ -56,26 +58,88 @@ namespace Tries
 
             return true;
         }
+
+        public bool Remove(string word)
+        {
+            TrieNode temp = root;
+
+            foreach (char c in word)
+            {
+                if (!temp.Children.ContainsKey(c))
+                {
+                    return false;
+                }
+                temp = temp.Children[c];
+            }
+
+            if (temp.IsWord)
+            {
+                temp.IsWord = false;
+                return true;
+            }
+
+            return false;
+        }
+
+        public List<string> GetWords(string word)
+        {
+            TrieNode temp = root;
+            List<string> words = new List<string>();
+
+            foreach(char c in word)
+            {
+                if (!temp.Children.ContainsKey(c))
+                {
+                    return words;
+                }
+                temp = temp.Children[c];
+            }
+
+            wordHelper(word.Substring(0, word.Length-1), temp, words);
+
+            return words;
+        }
+
+        public void wordHelper(string curWord, TrieNode curNode, List<string> words)
+        {
+            curWord += curNode.Value;
+
+            if (curNode.IsWord)
+            {
+                words.Add(curWord);
+            }
+
+            foreach(TrieNode n in curNode.Children.Values)
+            {
+                wordHelper(curWord, n, words);
+            }
+        }
+
     }
 
     class Program
     {
         static void Main(string[] args)
         {
+            Dictionary<string, string> dictionary = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText("fulldictionary.txt"));
+
             Trie trie = new Trie();
 
-            string userInputSoFar = "ba";
+            string userInputSoFar = Console.ReadLine();
 
-            //List<string> possibleWords = trie.GetWords(userInputSoFar);
-
-            var words = new[]  { "babe", "baby", "he", "hey", "hell", "hello", "heaven", "havana"};
-
-            foreach(string word in words)
+            foreach (string word in dictionary.Keys)
             {
                 trie.Insert(word);
             }
+            
+            List<string> possibleWords = trie.GetWords(userInputSoFar);
 
-            Console.WriteLine("Hello World!");
+            Console.WriteLine();
+
+            foreach (string word in possibleWords)
+            {
+                Console.WriteLine(word + " : " + dictionary[word]);
+            }
         }
     }
 }
