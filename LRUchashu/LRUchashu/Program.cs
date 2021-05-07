@@ -5,7 +5,7 @@ namespace LRUchashu
 {
     class LRUCache<T, U>
     {
-        private int lim;
+        public int lim { get; private set; }
         private LinkedList<KeyValuePair<T, U>> list;
         private Dictionary<T, LinkedListNode<KeyValuePair<T, U>>> map;
 
@@ -15,6 +15,7 @@ namespace LRUchashu
             list = new LinkedList<KeyValuePair<T, U>>();
             map = new Dictionary<T, LinkedListNode<KeyValuePair<T, U>>>();
         }
+
 
         public bool TryGetValue(T key, out U value)
         {
@@ -43,14 +44,14 @@ namespace LRUchashu
                 list.Remove(map[key]);
                 map[key] = node;
             }
-            
-            list.AddFirst(node);
 
             if (list.Count > lim) 
             {
                 map.Remove(list.Last.Value.Key);
                 list.Remove(list.Last);
             }
+
+            list.AddFirst(node);
         }
     }
 
@@ -58,7 +59,21 @@ namespace LRUchashu
     {
         static void Main(string[] args)
         {
-            
+            String rtrn = "";
+            LRUCache<string, string> cash = new LRUCache<string, string>(12);
+
+            for(int i = 0; i < cash.lim; i++)
+            {
+                cash.Put("node: " + i, Math.Pow(i, 2).ToString());
+            }
+
+            cash.Put("node: 4", "over 9000");
+
+            for(int i = 0; i < cash.lim; i++)
+            {
+                cash.TryGetValue("node: " + i, out rtrn);
+                Console.WriteLine("node: " + i + ", " + rtrn);
+            }
         }
     }
 }
